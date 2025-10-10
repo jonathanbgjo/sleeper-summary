@@ -3,7 +3,6 @@ import { generateReport } from "./report/generate.js";
 import { postToDiscord } from "./notify/discord.js";
 import { CONFIG } from "./config.js";
 
-/** Parse week override from CLI args */
 function parseWeekArg() {
   const i = process.argv.indexOf("--week");
   if (i !== -1) {
@@ -20,17 +19,15 @@ function parseWeekArg() {
     console.log("[boot] WEBHOOK set?:", !!CONFIG.DISCORD_WEBHOOK_URL);
     console.log("[boot] AI_KEY set?:", !!process.env.OPENAI_API_KEY);
 
-    // determine which week to pull
     const weekOverride = parseWeekArg();
 
-    // generate the markdown report (AI inside)
-    const { file, markdown, week, leagueName } = await generateReport(weekOverride);
+    const { file, markdown, week, leagueName, quotaHit } = await generateReport(weekOverride);
 
     console.log(`[report] Generated ${file} for ${leagueName} (week ${week})`);
     console.log("[report] Markdown length:", markdown?.length ?? 0);
 
-    // Post to Discord
-    await postToDiscord(markdown, { notice: aiError === "quota" ? "AI quota exceeded — using witty lite summary" : "" });
+    const meta = quotaHit ? { notice: "AI quota exceeded — using witty lite summary" } : undefined;
+    const res = await postToDiscord(markdown, meta);
     console.log("[report] postToDiscord result:", res);
   } catch (e) {
     console.error("[fatal]", e);

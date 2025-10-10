@@ -78,9 +78,9 @@ function wittyLiteSummary({ leagueName, week, matchups, nameOf }) {
 
   if (blowout) {
     lines.push(
-      `**Biggest Blowout:** ${blowout.winner} flattened ${blowout.loser} by ${fmt(
-        blowout.margin
-      )} — thoughts and prayers.`
+      `**Biggest Blowout:** ${blowout.winner} flattened ${
+        blowout.loser
+      } by ${fmt(blowout.margin)} — thoughts and prayers.`
     );
   }
 
@@ -93,9 +93,8 @@ function wittyLiteSummary({ leagueName, week, matchups, nameOf }) {
       if (!starters.length) continue;
       const minStarter = Math.min(...starters.map((p) => num(ptsMap[p])));
       const bench = (t.players || []).filter((p) => !starters.includes(p));
-      const bestBench = bench
-        .map((p) => num(ptsMap[p]))
-        .sort((x, y) => y - x)[0] || 0;
+      const bestBench =
+        bench.map((p) => num(ptsMap[p])).sort((x, y) => y - x)[0] || 0;
       if (bestBench - minStarter >= 10) {
         lines.push(
           `**Bench Oops:** ${nameOf(t.roster_id)} left ${fmt(
@@ -120,16 +119,24 @@ function fallbackMarkdown({ leagueName, week, rosters, matchups, nameOf }) {
   let md = `# ${leagueName} – Week ${week} Recap (Fallback)\n\n`;
   md += `**Team of the Week:** ${topTeam.name} (${fmt(topTeam.pts)} pts)\n`;
   if (blowout)
-    md += `**Biggest Blowout:** ${blowout.winner} over ${blowout.loser} by ${fmt(
-      blowout.margin
-    )} pts\n`;
+    md += `**Biggest Blowout:** ${blowout.winner} over ${
+      blowout.loser
+    } by ${fmt(blowout.margin)} pts\n`;
   md += `\n## Standings\n`;
   for (const t of table) md += `- ${t.name}: ${t.w}-${t.l} (PF ${fmt(t.pf)})\n`;
   return md;
 }
 
 /* ----------------------- compact serializer for the LLM -------------------- */
-function serializeWeek({ week, leagueName, rosters, matchups, transactions, nameOfRoster, nameOfPlayer }) {
+function serializeWeek({
+  week,
+  leagueName,
+  rosters,
+  matchups,
+  transactions,
+  nameOfRoster,
+  nameOfPlayer,
+}) {
   const byRosterId = new Map(rosters.map((r) => [r.roster_id, r]));
   const userNameOf = (rid) => {
     const r = byRosterId.get(rid);
@@ -194,7 +201,14 @@ function serializeWeek({ week, leagueName, rosters, matchups, transactions, name
     })
     .filter(Boolean);
 
-  return { league: leagueName, week, matchups: matchList, standings, trades, waivers };
+  return {
+    league: leagueName,
+    week,
+    matchups: matchList,
+    standings,
+    trades,
+    waivers,
+  };
 }
 
 /* --------------------------------- PROMPTS --------------------------------- */
@@ -235,7 +249,7 @@ function buildUser(data) {
 export async function generateReport(weekOverride) {
   // 1) Select week
   const state = await getState();
-  const week = weekOverride ?? (state.display_week ?? state.week);
+  const week = weekOverride ?? state.display_week ?? state.week;
 
   // 2) Pull data
   const leagueId = CONFIG.LEAGUE_ID;
@@ -274,7 +288,7 @@ export async function generateReport(weekOverride) {
     nameOfPlayer,
   });
 
-   // 5) Try AI → witty lite on quota → plain fallback otherwise
+  // 5) Try AI → witty lite on quota → plain fallback otherwise
   let finalMarkdown = "";
   let usedAI = false;
   let quotaHit = false;
@@ -330,5 +344,11 @@ export async function generateReport(weekOverride) {
   // 6) Write & return
   const file = `week_${week}_report.md`;
   await fs.writeFile(file, finalMarkdown);
-  return { file, markdown: finalMarkdown, week, leagueName: league.name };
+  return {
+    file,
+    markdown: finalMarkdown,
+    week,
+    leagueName: league.name,
+    quotaHit,
+  };
 }
