@@ -1,5 +1,5 @@
 # supDawg – Weekly Sleeper Report
-
+A Vercel-deployed Node.js app that pulls Sleeper league data, runs an OpenAI-generated weekly fantasy recap (team-by-team + trade analyzer + waiver gems + power rankings), renders it in a lightweight web UI, and posts rich Discord embeds on demand. Built with serverless API routes, native fetch, and marked.js for Markdown rendering.
 
 ## Quick start
 1. `npm i`
