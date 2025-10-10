@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>supDawg Weekly Report</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Marked to render Markdown → HTML -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 24px; }
+    h1 { margin-bottom: 8px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; margin-top: 12px; }
+    label { font-weight: 600; }
+    input, select, button { padding: 8px 10px; border-radius: 8px; border: 1px solid #d1d5db; }
+    button { border: none; background: #111827; color: white; cursor: pointer; }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    .row { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; }
+    .muted { color: #6b7280; font-size: 12px; }
+    #out h2 { margin-top: 1.25em; padding-top: .25em; border-top: 1px dashed #e5e7eb; }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; background: #f3f4f6; margin-left: 8px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>supDawg Weekly Report <span id="status" class="pill">loading…</span></h1>
+  <div class="card">
+    <div class="row">
+      <div>
+        <label for="leagueId">Sleeper League ID</label><br/>
+        <input id="leagueId" type="text" placeholder="1257419979179966464" size="28" />
+      </div>
+      <div>
+        <label for="week">Week</label><br/>
+        <select id="week"></select>
+        <div class="muted" id="weekHint"></div>
+      </div>
+      <div>
+        <button id="run">Generate Report</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="meta" style="display:none"></div>
+  <div class="card" id="out">Pick a league + week and hit “Generate Report”.</div>
+
+  <script>
+    const el = (id) => document.getElementById(id);
+    const leagueInput = el('leagueId');
+    const weekSelect = el('week');
+    const weekHint = el('weekHint');
+    const statusPill = el('status');
+    const runBtn = el('run');
+    const out = el('out');
+    const meta = el('meta');
+
+    async function fetchState() {
+      const r = await fetch('/api/state');
+      if (!r.ok) throw new Error('state failed');
+      return r.json();
+    }
+
+    function setStatus(text, ok = true) {
+      statusPill.textContent = text;
+      statusPill.style.background = ok ? '#e5e7eb' : '#fee2e2';
+    }
+
+    function populateWeeks(currentWeek) {
+      weekSelect.innerHTML = '';
+      const max = Number(currentWeek) || 1;
+      for (let i = 1; i <= max; i++) {
+        const opt = document.createElement('option');
+        opt.value = String(i);
+        opt.textContent = `Week ${i}`;
+        if (i === max) opt.selected = true;
+        weekSelect.appendChild(opt);
+      }
+      weekHint.textContent = `Up to current week: ${max}`;
+    }
+
+    async function init() {
+      try {
+        const s = await fetchState();
+        if (s.defaultLeagueId) leagueInput.value = s.defaultLeagueId;
+        populateWeeks(s.display_week || s.week || 1);
+        setStatus('ready');
+      } catch (e) {
+        populateWeeks(1);
+        setStatus('offline', false);
+      }
+    }
+
+    function renderMarkdown(md) {
+      // Very small safety: strip script tags
+      const safeMd = (md || '').replace(/<script/gi, '&lt;script');
+      out.innerHTML = marked.parse(safeMd);
+    }
+
+    async function run() {
+      const leagueId = leagueInput.value.trim();
+      const week = Number(weekSelect.value);
+      if (!leagueId) { alert('Please enter a Sleeper League ID'); return; }
+      runBtn.disabled = true; setStatus('running…');
+
+      try {
+        const url = `/api/report?leagueId=${encodeURIComponent(leagueId)}&week=${week}`;
+        const r = await fetch(url);
+        const j = await r.json();
+        if (!r.ok) throw new Error(j?.error || 'request failed');
+
+        meta.style.display = 'block';
+        meta.innerHTML = `<b>League:</b> ${j.leagueName || ''} &nbsp; <b>Week:</b> ${j.week}
+                          ${j.usedAI ? '<span class="pill">AI</span>' : j.quotaHit ? '<span class="pill">Lite</span>' : '<span class="pill">Fallback</span>'}`;
+
+        renderMarkdown(j.markdown);
+        setStatus('done');
+      } catch (e) {
+        out.textContent = e.message || String(e);
+        setStatus('error', false);
+      } finally {
+        runBtn.disabled = false;
+      }
+    }
+
+    runBtn.addEventListener('click', run);
+    init();
+  </script>
+</body>
+</html>

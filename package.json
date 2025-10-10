@@ -8,7 +8,8 @@
     "report:week": "node src/index.js --week",
     "env:check": "node -e \"console.log('cwd:', process.cwd()); console.log('ENV URL:', process.env.DISCORD_WEBHOOK_URL)\"",
     "env:check:dotenv": "node -r dotenv/config -e \"console.log('ENV URL:', process.env.DISCORD_WEBHOOK_URL)\"",
-    "ping:discord": "node scripts/ping-discord.js"
+    "ping:discord": "node scripts/ping-discord.js",
+    "start": "node src/server.js"
   },
   "engines": {
     "node": ">=20"
@@ -16,6 +17,7 @@
   "dependencies": {
     "dayjs": "^1.11.13",
     "dotenv": "^17.2.3",
+    "express": "^5.1.0",
     "openai": "^6.3.0"
   }
 }

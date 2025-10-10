@@ -1,15 +1,23 @@
-# SupDawg Week 5 Recap: The Weekend Warriors
+# SupDawg League Week 5 Recap
 
-**Manager of the Week**: ***Jewmarr Chase*** swoops in with 209.69 points! If their performance was a movie, it would be *Gone with the Wind*—a total blowout that left their opponent in the dust. 
+Welcome back, SupDawgers! Week 5 was a whirlwind of touchdowns, bench blunders, and copious amounts of fantasy anguish. Let's dive into the highlights, lowlights, and all the right bites!
 
-**Biggest Blowout**: The aforementioned Jewmarr Chase achieved a comfortable victory over **Herbert Fully Loaded** (171.93) by nearly *38 points*. Perhaps Herbert should consult with their namesake for a reboot.
+## **Manager of the Week: Jewmarr Chase**
+With a staggering **209.69 points**, Jewmarr Chase put the league on notice. If you were wondering where the point factory is located, it’s right here! Matthew Stafford tossed a juicy **35.11 points** while Jonathan Taylor galloped to **31.6**, leaving his competition in the dust.
 
-**Heartbreaker**: **LISAN** put up a respectable 143.62 but fell to **For Love or the Chase?** (156.97). Just when they thought they had a shot, Cooper Rush said, “Not today!” Guess who got benched by the fantasy gods?
+## **Biggest Blowout: Jewmarr Chase vs. Herbert Fully Loaded**
+In a tale of two teams, Jewmarr Chase obliterated Herbert Fully Loaded, outscoring them **209.69 to 171.93**. Ouch! It wasn't even close—the only suspense was whether Herbert's squad would break 150 points. Spoiler: They didn't.
 
-**Bench Oops**: The sad story of **Warrening, Bowers** features Jacory Croskey-Merritt, who racked up 29 points while sitting on the bench. Meanwhile, a certain starter only managed a weak 7.08. Oof, that’s what we call a benching faux pas!
+## **Heartbreaker: For Love or the Chase?**
+For those who spent their weekend glued to **For Love or the Chase?**’s match, it was a rollercoaster of emotions. Rhamondre Stevenson had a decent showing with **14.3 points**, but the team still crumbled to my gochu is dak dak, who edged them out **146.47 to 156.97**. Cue the sad music!
 
-**Trade Fallout**: What’s this? Spencer Rattler (sent to **Jewmarr Chase**) submits a fine performance with 21.53 points! Who said trades are just paperwork? Someone’s prepping for a LinkedIn endorsement!
+## **Bench Oops: Warrening, Bowers**
+Warrening, Bowers had a big “what if” moment as they decided to bench Jacory Croskey-Merritt, who racked up **29 points**. Just a gentle reminder that having a quarterback is cool, but having someone who scores is cooler!
 
-**Waiver Gem**: Early bird gets the worm! **Cardiac Cats Are Back** snagged the Pittsburgh Steelers from waivers just in time. Talk about a power move! 
+## **Trade Fallout: For Love or the Chase?**
+In a twist of fate, Kareem Hunt scored **Kareem Hunt-sized** points for chAmi after being picked up off waivers. Not quite the trade of the century, but hey, he didn't hurt them, right? 
 
-With Week 6 looming, will *In Goff We Trust* finally break into the win column, or do they need a fantasy exorcist? Stay tuned!
+## **Waiver Gem: Cardiac Cats Are Back**
+The waivers kicked in nicely for the Cardiac Cats as they picked up the Pittsburgh Steelers' defense. They turned out to be a solid choice, bringing in more than just a conservative paycheck to the squad.
+
+So there you have it—week 5's hits, misses, and the metric tons of fantasy dramatics we love to see. Until next week, keep those trade offers coming and remember: wait, do you really need that second tight end? 🏈

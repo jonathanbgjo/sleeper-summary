@@ -246,13 +246,13 @@ function buildUser(data) {
  * @param {number|undefined} weekOverride
  * @returns {{file:string, markdown:string, week:number, leagueName:string}}
  */
-export async function generateReport(weekOverride) {
+export async function generateReport(weekOverride, leagueIdOverride) {
   // 1) Select week
   const state = await getState();
   const week = weekOverride ?? state.display_week ?? state.week;
 
   // 2) Pull data
-  const leagueId = CONFIG.LEAGUE_ID;
+  const leagueId = leagueIdOverride || CONFIG.LEAGUE_ID;
   const [league, users, rosters, matchups, txns, players] = await Promise.all([
     getLeague(leagueId),
     getLeagueUsers(leagueId),

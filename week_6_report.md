@@ -1,37 +1,33 @@
-# SuppDawg League Week 6 Recap
+# SupDawg League Week 6 Recap
 
-Well folks, welcome to another thrilling week of **SupDawg** fantasy football! Week 6 had more surprises than a game of hide and seek with Ryan Leaf. Let’s break it down.
-
----
-
-**Manager of the Week: C.T.Ebo**  
-With a jaw-dropping **43.1 points**, C.T.Ebo flexed like a dad at a BBQ, even with Josh Allen just hanging around. **Dallas Goedert** delivered a solid **23.4**, proving that tight ends can score more than just the occasional free pizza at the team meeting.
+**Manager of the Week:**  
+This week’s crown goes to **C.T.Ebo**! With a whopping **43.1 points**, they managed to outshine the competition like a LED bulb at a candlelit dinner. Big shoutout to that dynamic duo of **Cam Skattebo** and **Dallas Goedert** who combined for over 43 points. I guess they heard "score big or go home!"
 
 ---
 
-**Biggest Blowout: C.T.Ebo vs. LISAN**  
-C.T.Ebo not only took the crown but also put LISAN on the fantasy ***“do not disturb”*** list, leaving them scoreless. It was like showing up to a potluck with no dish—awkward and sad all around.
+**Biggest Blowout:**  
+Gold stars to **C.T.Ebo** for steamrolling **LISAN** with a score of **43.1 to 0**. That’s not just a win; it’s a testimony to LISAN’s invisibility. If scoring points were a profession, they’d be unemployed!
 
 ---
 
-**Heartbreaker of the Week: my gochu is dak dak vs. Warrening, Bowers**  
-In a clash that could only be labeled as a battle for the ages, my gochu is dak dak squeaked out a win with **21.4 points**. Meanwhile, Warrening, Bowers took home a big ol' goose egg. Ouch! Someone needs a hug (and maybe a new game plan).
+**Heartbreaker:**  
+In a nail-biting matchup, **J.J. McCarthy** and the gang over at **Warrening, Bowers** collectively scored **0** points against **my gochu is dak dak**, who squeaked by with **20.4**. If they were a bakery, they’d be selling the world’s saddest éclairs—plain and empty!
 
 ---
 
-**Bench Oops: 100%……. Frauds!!**  
-Oopsie daisies! While **Jaxson Dart** picked up **26.88 points**, he was busy hanging out on the bench. Who needs a starting QB when you've got the next Tom Brady warming the sidelines, right?
+**Bench Oops:**  
+The whispers in the fantasy wind this week suggest that **For Love or the Chase?** might’ve missed a gem on the bench. Their star **Ja'Marr Chase** could’ve helped his owners avoid landing at the bottom with a big old **0 points** as a starter. Seriously, did ya’ll think zero was the new hero?
 
 ---
 
 **Trade Fallout:**  
-While there were no trades to discuss this week, it seems everyone’s keeping their cards close to their chests. Remember—sometimes less is more, kinda like pineapple on pizza. So let’s see if next week’s trades can warm things up!
+Well, talk about some awkward post-trade dinner conversation! **J.J. McCarthy** is like that ex who looks great after a breakup. Just look at his clean sheet of **0 points** while sitting on the bench of **Warrening, Bowers**—that’s a real "What could’ve been" scenario.
 
 ---
 
-**Waiver Gem: Not Applicable**  
-No hidden gems to report this week. But keep those eyes peeled! The waiver wire is like a treasure hunt where the treasure is so hidden, you might need a map (and a good GPS).
+**Waiver Gem:**  
+No waiver gems this week, unless you consider it "gem-like" to score **0 points**. Maybe the wire was just a bit dry this week?
 
 ---
 
-That’s it for this week's festivities! Join us next week to see who manages to turn their luck around and who continues their eternal quest toward the coveted toilet bowl playoffs! 🏆
+So there you have it! As we gear up for next week, remember: It's not just about winning; it’s about how creatively you can lose. See you on the field!
