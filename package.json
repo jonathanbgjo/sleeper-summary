@@ -9,7 +9,8 @@
     "env:check": "node -e \"console.log('cwd:', process.cwd()); console.log('ENV URL:', process.env.DISCORD_WEBHOOK_URL)\"",
     "env:check:dotenv": "node -r dotenv/config -e \"console.log('ENV URL:', process.env.DISCORD_WEBHOOK_URL)\"",
     "ping:discord": "node scripts/ping-discord.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "dev": "vercel dev"
   },
   "engines": {
     "node": ">=20"
