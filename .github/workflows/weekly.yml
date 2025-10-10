@@ -1,0 +1,26 @@
+name: Weekly Sleeper Report
+
+on:
+  schedule:
+  - cron: "30 13 * * MON" # 09:30 AM ET Mondays
+  workflow_dispatch:
+
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+        node-version: "20"
+      - run: npm ci || npm i
+      - run: npm run report
+        env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        SLEEPER_LEAGUE_ID: ${{ secrets.SLEEPER_LEAGUE_ID }}
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-report
+          path: week_*_report.md
