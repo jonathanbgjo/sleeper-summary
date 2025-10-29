@@ -246,7 +246,10 @@ function buildUser(data) {
  * @param {number|undefined} weekOverride
  * @returns {{file:string, markdown:string, week:number, leagueName:string}}
  */
-export async function generateReport(weekOverride, leagueIdOverride) {
+ export async function generateReport(weekOverride, leagueIdOverride, options = {}) {
+  const REQUIRE_AI = options.requireAI === true
+    || process.env.REQUIRE_AI === "true"
+    || (Array.isArray(process?.argv) && process.argv.includes("--require-ai"));
   // 1) Select week
   const state = await getState();
   const week = weekOverride ?? state.display_week ?? state.week;
@@ -292,7 +295,7 @@ export async function generateReport(weekOverride, leagueIdOverride) {
   let finalMarkdown = "";
   let usedAI = false;
   let quotaHit = false;
-
+  let aiReason = "none";
   try {
     console.log(
       "[ai] model:",
@@ -310,19 +313,29 @@ export async function generateReport(weekOverride, leagueIdOverride) {
 
     if (error === "quota") {
       quotaHit = true;
+      aiReason = "quota";
       console.warn("[ai] quota exceeded — using witty lite summary");
-    }
-
+    } else if (error) {
+      aiReason = String(error);
+   }
+    
     if (text && text.trim().length > 50) {
       finalMarkdown = text.trim();
       usedAI = true;
       console.log("[ai] received length:", finalMarkdown.length);
+    } else{
+      if (aiReason === "none") aiReason = "empty";
     }
   } catch (e) {
     console.warn("[ai] generation failed:", e?.message || e);
+    aiReason = e?.message || "exception";
+    console.warn("[ai] generation failed:", aiReason);
   }
 
   if (!usedAI) {
+    if (REQUIRE_AI) {
+      throw new Error(`[ai] REQUIRE_AI set — aborting because AI failed (reason: ${aiReason})`);
+    }
     if (quotaHit) {
       finalMarkdown = wittyLiteSummary({
         leagueName: league.name,
@@ -340,15 +353,13 @@ export async function generateReport(weekOverride, leagueIdOverride) {
       });
     }
   }
-
+  if (!usedAI) {
+    if (REQUIRE_AI) {
+    throw new Error(`[ai] REQUIRE_AI set — aborting because AI failed (reason: ${aiReason})`);
+    }
+  }
   // 6) Write & return
   const file = `week_${week}_report.md`;
   await fs.writeFile(file, finalMarkdown);
-  return {
-    file,
-    markdown: finalMarkdown,
-    week,
-    leagueName: league.name,
-    quotaHit,
-  };
+  return { file, markdown: finalMarkdown, week, leagueName: league.name, quotaHit, usedAI, aiReason };
 }

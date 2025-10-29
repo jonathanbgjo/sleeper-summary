@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <title>supDawg Weekly Report</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Marked to render Markdown → HTML -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     :root { color-scheme: light dark; }
@@ -19,6 +18,7 @@
     .muted { color: #6b7280; font-size: 12px; }
     #out h2 { margin-top: 1.25em; padding-top: .25em; border-top: 1px dashed #e5e7eb; }
     .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; background: #f3f4f6; margin-left: 8px; font-size: 12px; }
+    .actions { display:flex; gap:8px; }
   </style>
 </head>
 <body>
@@ -34,8 +34,9 @@
         <select id="week"></select>
         <div class="muted" id="weekHint"></div>
       </div>
-      <div>
+      <div class="actions">
         <button id="run">Generate Report</button>
+        <button id="post">Post to Discord</button>
       </div>
     </div>
   </div>
@@ -50,20 +51,20 @@
     const weekHint = el('weekHint');
     const statusPill = el('status');
     const runBtn = el('run');
+    const postBtn = el('post');
     const out = el('out');
     const meta = el('meta');
+    let lastRendered = null; // store last report for convenience
 
     async function fetchState() {
       const r = await fetch('/api/state');
       if (!r.ok) throw new Error('state failed');
       return r.json();
     }
-
     function setStatus(text, ok = true) {
       statusPill.textContent = text;
       statusPill.style.background = ok ? '#e5e7eb' : '#fee2e2';
     }
-
     function populateWeeks(currentWeek) {
       weekSelect.innerHTML = '';
       const max = Number(currentWeek) || 1;
@@ -76,7 +77,6 @@
       }
       weekHint.textContent = `Up to current week: ${max}`;
     }
-
     async function init() {
       try {
         const s = await fetchState();
@@ -88,19 +88,15 @@
         setStatus('offline', false);
       }
     }
-
     function renderMarkdown(md) {
-      // Very small safety: strip script tags
       const safeMd = (md || '').replace(/<script/gi, '&lt;script');
       out.innerHTML = marked.parse(safeMd);
     }
-
     async function run() {
       const leagueId = leagueInput.value.trim();
       const week = Number(weekSelect.value);
       if (!leagueId) { alert('Please enter a Sleeper League ID'); return; }
-      runBtn.disabled = true; setStatus('running…');
-
+      runBtn.disabled = true; postBtn.disabled = true; setStatus('running…');
       try {
         const url = `/api/report?leagueId=${encodeURIComponent(leagueId)}&week=${week}`;
         const r = await fetch(url);
@@ -110,18 +106,36 @@
         meta.style.display = 'block';
         meta.innerHTML = `<b>League:</b> ${j.leagueName || ''} &nbsp; <b>Week:</b> ${j.week}
                           ${j.usedAI ? '<span class="pill">AI</span>' : j.quotaHit ? '<span class="pill">Lite</span>' : '<span class="pill">Fallback</span>'}`;
-
+        lastRendered = j;
         renderMarkdown(j.markdown);
         setStatus('done');
       } catch (e) {
         out.textContent = e.message || String(e);
         setStatus('error', false);
       } finally {
-        runBtn.disabled = false;
+        runBtn.disabled = false; postBtn.disabled = false;
       }
     }
-
+    async function post() {
+      const leagueId = leagueInput.value.trim();
+      const week = Number(weekSelect.value);
+      if (!leagueId) { alert('Please enter a Sleeper League ID'); return; }
+      postBtn.disabled = true; setStatus('posting…');
+      try {
+        const url = `/api/discord?leagueId=${encodeURIComponent(leagueId)}&week=${week}`;
+        const r = await fetch(url);
+        const j = await r.json();
+        if (!r.ok || !j.ok) throw new Error(j?.error || 'post failed');
+        setStatus('posted');
+      } catch (e) {
+        alert(e.message || String(e));
+        setStatus('error', false);
+      } finally {
+        postBtn.disabled = false;
+      }
+    }
     runBtn.addEventListener('click', run);
+    postBtn.addEventListener('click', post);
     init();
   </script>
 </body>

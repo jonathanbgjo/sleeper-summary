@@ -1,33 +1,21 @@
 # SupDawg League Week 6 Recap
 
 **Manager of the Week:**  
-This week’s crown goes to **C.T.Ebo**! With a whopping **43.1 points**, they managed to outshine the competition like a LED bulb at a candlelit dinner. Big shoutout to that dynamic duo of **Cam Skattebo** and **Dallas Goedert** who combined for over 43 points. I guess they heard "score big or go home!"
-
----
+Congratulations to **Cardiac Cats Are Back**, who pulled off a heart-stopping 208.52 points! Looks like their players finally got the memo this week, unlike their livers with all that stress.
 
 **Biggest Blowout:**  
-Gold stars to **C.T.Ebo** for steamrolling **LISAN** with a score of **43.1 to 0**. That’s not just a win; it’s a testimony to LISAN’s invisibility. If scoring points were a profession, they’d be unemployed!
-
----
+In a matchup that felt about as close as a Kardashian’s Wi-Fi password, **Jewmarr Chase** obliterated **100%……. Frauds!!** with a score of 190.6 to 123.85. That’s what you call a “clutch” performance—not to be confused with a clutch purse!
 
 **Heartbreaker:**  
-In a nail-biting matchup, **J.J. McCarthy** and the gang over at **Warrening, Bowers** collectively scored **0** points against **my gochu is dak dak**, who squeaked by with **20.4**. If they were a bakery, they’d be selling the world’s saddest éclairs—plain and empty!
-
----
+My sympathies go out to **For Love or the Chase?** with a dismal 108.31 showing. When Sam Darnold outscored your entire starting squad, it’s time to rethink your life choices. Spoiler alert: It involves not starting Sam Darnold.
 
 **Bench Oops:**  
-The whispers in the fantasy wind this week suggest that **For Love or the Chase?** might’ve missed a gem on the bench. Their star **Ja'Marr Chase** could’ve helped his owners avoid landing at the bottom with a big old **0 points** as a starter. Seriously, did ya’ll think zero was the new hero?
-
----
+**my gochu is dak dak** might want to spend some time with their bench, where *CeeDee Lamb* and *Justin Jefferson* could have made a fine start. Instead, they played the fantasy equivalent of hide and seek while putting up 0 points. 
 
 **Trade Fallout:**  
-Well, talk about some awkward post-trade dinner conversation! **J.J. McCarthy** is like that ex who looks great after a breakup. Just look at his clean sheet of **0 points** while sitting on the bench of **Warrening, Bowers**—that’s a real "What could’ve been" scenario.
-
----
+Meanwhile, **$70 QB** shrugged off the drama of not trading for a player who then scored 39.24 points. Maybe next time, you’ll try a little less “QB drama” and a little more “decisive trading.” 
 
 **Waiver Gem:**  
-No waiver gems this week, unless you consider it "gem-like" to score **0 points**. Maybe the wire was just a bit dry this week?
+Keep an eye on **J.J. McCarthy**—zero points this week, but as we say in the fantasy world, “There's always next week!” Maybe the waiver wire will treat him better?
 
----
-
-So there you have it! As we gear up for next week, remember: It's not just about winning; it’s about how creatively you can lose. See you on the field!
+That’s a wrap for Week 6! Stay tuned for next week’s drama as we find out if our managers are really "on the mend" or just "in denial!" 🏈
