@@ -14,7 +14,7 @@ import {
 import { loadPlayersCache, playerName } from "../sleeper/playersCache.js";
 
 import { aiSummarize } from "../ai/provider.js";
-
+const IS_VERCEL = !!process.env.VERCEL;
 /* --------------------------- tiny numeric helpers -------------------------- */
 const num = (v) => Number(v || 0);
 const fmt = (n) => (typeof n === "number" ? n : 0).toFixed(2);
@@ -246,10 +246,15 @@ function buildUser(data) {
  * @param {number|undefined} weekOverride
  * @returns {{file:string, markdown:string, week:number, leagueName:string}}
  */
- export async function generateReport(weekOverride, leagueIdOverride, options = {}) {
-  const REQUIRE_AI = options.requireAI === true
-    || process.env.REQUIRE_AI === "true"
-    || (Array.isArray(process?.argv) && process.argv.includes("--require-ai"));
+export async function generateReport(
+  weekOverride,
+  leagueIdOverride,
+  options = {}
+) {
+  const REQUIRE_AI =
+    options.requireAI === true ||
+    process.env.REQUIRE_AI === "true" ||
+    (Array.isArray(process?.argv) && process.argv.includes("--require-ai"));
   // 1) Select week
   const state = await getState();
   const week = weekOverride ?? state.display_week ?? state.week;
@@ -317,13 +322,13 @@ function buildUser(data) {
       console.warn("[ai] quota exceeded — using witty lite summary");
     } else if (error) {
       aiReason = String(error);
-   }
-    
+    }
+
     if (text && text.trim().length > 50) {
       finalMarkdown = text.trim();
       usedAI = true;
       console.log("[ai] received length:", finalMarkdown.length);
-    } else{
+    } else {
       if (aiReason === "none") aiReason = "empty";
     }
   } catch (e) {
@@ -334,7 +339,9 @@ function buildUser(data) {
 
   if (!usedAI) {
     if (REQUIRE_AI) {
-      throw new Error(`[ai] REQUIRE_AI set — aborting because AI failed (reason: ${aiReason})`);
+      throw new Error(
+        `[ai] REQUIRE_AI set — aborting because AI failed (reason: ${aiReason})`
+      );
     }
     if (quotaHit) {
       finalMarkdown = wittyLiteSummary({
@@ -353,13 +360,28 @@ function buildUser(data) {
       });
     }
   }
-  if (!usedAI) {
-    if (REQUIRE_AI) {
-    throw new Error(`[ai] REQUIRE_AI set — aborting because AI failed (reason: ${aiReason})`);
-    }
-  }
+
   // 6) Write & return
   const file = `week_${week}_report.md`;
-  await fs.writeFile(file, finalMarkdown);
-  return { file, markdown: finalMarkdown, week, leagueName: league.name, quotaHit, usedAI, aiReason };
+  try {
+    if (IS_VERCEL) {
+      // optional: write to /tmp if you really want a file during the request lifetime
+      await fs.writeFile(`/tmp/${file}`, finalMarkdown);
+    } else {
+      await fs.writeFile(file, finalMarkdown);
+    }
+  } catch (e) {
+    // don’t crash the API just because the write failed in serverless
+    console.warn("[report] write skipped:", e?.message || e);
+  }
+
+  return {
+    file,
+    markdown: finalMarkdown,
+    week,
+    leagueName: league.name,
+    quotaHit,
+    usedAI,
+    aiReason,
+  };
 }

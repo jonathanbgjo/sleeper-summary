@@ -55,7 +55,7 @@
     const out = el('out');
     const meta = el('meta');
     let lastRendered = null; // store last report for convenience
-
+    
     async function fetchState() {
       const r = await fetch('/api/state');
       if (!r.ok) throw new Error('state failed');
